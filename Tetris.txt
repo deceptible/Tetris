@@ -1,7 +1,15 @@
 Developing Tetris Code:
 
 Idea:
-	Create a web app that allows someone to play Tetris by themself, against an AI model, or AI models against other AI models. The AI models will be different methods of implementing the AI. Presumably, this will be different ML techniques like nearest-neighbor, LDA, QDA. The AI models and how that works has not been thought out yet due to lack of understanding of this field. The AI is the crux of this project to develop skills with it. The main attributes that I am focusing on improving through this project are: 1. learning to code in general and how to do so towards a more difficult goal rather than a single goal like I normally do for class, 2. Learning to create a web app, 3. learning machine learning and how to develop a model to achieve my goal.
+	Create a web app that allows someone to play Tetris by themself, against an AI model, or AI models against other AI models.
+	The AI models will be different methods of implementing the AI.
+	Presumably, this will be different ML techniques like nearest-neighbor, LDA, QDA.
+	The AI models and how that works has not been thought out yet due to lack of understanding of this field.
+	The AI is the crux of this project to develop skills with it.
+	The main attributes that I am focusing on improving through this project are: 
+		1. learning to code in general and how to do so towards a more difficult goal rather than a single goal like I normally do for class.
+		2. Learning to create a web app
+		3. learning machine learning and how to develop a model to achieve my goal.
 
 Goals:
 
@@ -29,3 +37,13 @@ Tetris Game (Outside Game):
  - Should show the top 5 scores of all time with 1 section for players and another for the best AI model
  - Should allow the user to select which game mode to play
 
+Hierarchy:
+
+GameBoard.py:
+	This file contains the gameBoard and the current state of the game.
+	This will be responsible for everything relating to or interacting with the board.
+	
+Piece.py:
+	This file will contain the different pieces in the game.
+	This will also do everything relating to the pieces like rotations.
+	
