@@ -1,0 +1,31 @@
+Developing Tetris Code:
+
+Idea:
+	Create a web app that allows someone to play Tetris by themself, against an AI model, or AI models against other AI models. The AI models will be different methods of implementing the AI. Presumably, this will be different ML techniques like nearest-neighbor, LDA, QDA. The AI models and how that works has not been thought out yet due to lack of understanding of this field. The AI is the crux of this project to develop skills with it. The main attributes that I am focusing on improving through this project are: 1. learning to code in general and how to do so towards a more difficult goal rather than a single goal like I normally do for class, 2. Learning to create a web app, 3. learning machine learning and how to develop a model to achieve my goal.
+
+Goals:
+
+- learning to code in general and how to do so towards a more difficult goal rather than a single goal like I normally do for class
+
+- Learning to create a web app
+
+- learning machine learning and how to develop a model to achieve my goal
+
+Tetris Game Main Design:
+Game Board:
+ - This will presumably be an array with 0 representing empty space and 1 representing occupied space
+
+Player:
+ - Maintain stats like high score, username, or things along that nature
+
+Tetris Game (During Play):
+ - This should maintain the current score, the current elapsed time.
+ - This should allow pausing either by selecting a button to the side or pressing esc
+ - As per the rules of Tetris, this should also have the space to store a piece, and allow the user to see the next 3 pieces
+ - This should also have a game speed that slowly speeds up to a max speed like the Tetris game does.
+ - Should have sound effects for placing pieces, showing tick speed (potentially), and clearing a row
+
+Tetris Game (Outside Game):
+ - Should show the top 5 scores of all time with 1 section for players and another for the best AI model
+ - Should allow the user to select which game mode to play
+
