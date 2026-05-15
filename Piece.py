@@ -1,6 +1,8 @@
 import numpy as np
 
 class Piece:
+    isLocked = False
+
     def Transpose(self):
         for coords in range(len(self.coordinates)):
             r = self.coordinates[coords][0]
@@ -50,7 +52,6 @@ class O(Piece):
             [1, 1]
         ])
         self.coordinates = [(0,0), (0,1), (1,0), (1,1)]
-        self.isLocked = False
 
 class T(Piece):
     def __init__(self):
@@ -59,7 +60,6 @@ class T(Piece):
             [1, 1, 1]
         ])
         self.coordinates = [(0,1), (1,0), (1,1), (1,2)]
-        self.isLocked = False
 
 class S(Piece):
     def __init__(self):
@@ -68,7 +68,6 @@ class S(Piece):
             [1, 1, 0]
         ])
         self.coordinates = [(0,1), (0,2), (1,0), (1,1)]
-        self.isLocked = False
 
 class Z(Piece):
     def __init__(self):
@@ -77,7 +76,6 @@ class Z(Piece):
             [0, 1, 1]
         ])
         self.coordinates = [(0,0), (0,1), (1,1), (1,2)]
-        self.isLocked = False
 
 class J(Piece):
     def __init__(self):
@@ -86,7 +84,6 @@ class J(Piece):
             [1, 1, 1]
         ])
         self.coordinates = [(0,0), (1,0), (1,1), (1,2)]
-        self.isLocked = False
 
 class L(Piece):
     def __init__(self):
@@ -95,4 +92,3 @@ class L(Piece):
             [1, 1, 1]
         ])
         self.coordinates = [(0,2), (1,0), (1,1), (1,2)]
-        self.isLocked = False

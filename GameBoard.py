@@ -126,3 +126,22 @@ class GameBoard:
             newCoords.append((row, col + 1))
 
         Piece.setCoordinates(newCoords)
+
+    def clearLines(self):
+        highestClearedRow = 100
+
+        clearLine = True
+
+        for row in range(0, 24):
+            for col in range(0, 9):
+                if self.currentBoard[(row, col)] == (0):
+                    clearLine = False
+            if clearLine == True:
+                if row < highestClearedRow:
+                    highestClearedRow = row
+
+                for col in range(0, 9):
+                    self.currentBoard[(row, col)] = (0)
+
+        if highestClearedRow != 100:
+            
