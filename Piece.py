@@ -13,7 +13,6 @@ class Piece:
         transposed = self.Transpose()
 
         columns = transposed.shape[1]
-        print(columns)
 
         for coords in range(len(self.coordinates)):
             r = self.coordinates[coords][0]
@@ -31,6 +30,12 @@ class Piece:
     def setCoordinates(self, coords):
         self.coordinates = coords
 
+    def setLockStatus(self, state):
+        self.isLocked = state
+
+    def getLockStatus(self):
+        return self.isLocked
+
 class I(Piece):
     def __init__(self):
         self.matrix = np.array([
@@ -45,6 +50,7 @@ class O(Piece):
             [1, 1]
         ])
         self.coordinates = [(0,0), (0,1), (1,0), (1,1)]
+        self.isLocked = False
 
 class T(Piece):
     def __init__(self):
@@ -53,6 +59,7 @@ class T(Piece):
             [1, 1, 1]
         ])
         self.coordinates = [(0,1), (1,0), (1,1), (1,2)]
+        self.isLocked = False
 
 class S(Piece):
     def __init__(self):
@@ -61,6 +68,7 @@ class S(Piece):
             [1, 1, 0]
         ])
         self.coordinates = [(0,1), (0,2), (1,0), (1,1)]
+        self.isLocked = False
 
 class Z(Piece):
     def __init__(self):
@@ -69,6 +77,7 @@ class Z(Piece):
             [0, 1, 1]
         ])
         self.coordinates = [(0,0), (0,1), (1,1), (1,2)]
+        self.isLocked = False
 
 class J(Piece):
     def __init__(self):
@@ -77,6 +86,7 @@ class J(Piece):
             [1, 1, 1]
         ])
         self.coordinates = [(0,0), (1,0), (1,1), (1,2)]
+        self.isLocked = False
 
 class L(Piece):
     def __init__(self):
@@ -85,3 +95,4 @@ class L(Piece):
             [1, 1, 1]
         ])
         self.coordinates = [(0,2), (1,0), (1,1), (1,2)]
+        self.isLocked = False

@@ -15,8 +15,8 @@ class GameBoard:
         newCoords = []
 
         for c in Piece.getCoordinates():
-            row = c[1]
-            col = c[0]
+            row = c[0]
+            col = c[1]
 
             if self.currentBoard[(row + 1,col + 4)] != (0):
                 print("Error: Location Already in Use")
@@ -31,37 +31,37 @@ class GameBoard:
     def isValidMove(self, Piece, direction):
         if direction == "Left":
             for c in Piece.getCoordinates():
-                row = c[1]
-                col = c[0]
+                row = c[0]
+                col = c[1]
 
                 if col - 1 < 0:
                     return False
                 
-                if self.currentBoard[(row, col - 1)] != (0):
+                if self.currentBoard[(row, col - 1)] == (1):
                     return False
         
         if direction == "Right":
             for c in Piece.getCoordinates():
-                row = c[1]
-                col = c[0]
+                row = c[0]
+                col = c[1]
 
                 if col + 1 > 9:
                     return False
                 
-                if self.currentBoard[(row, col + 1)] != (0):
+                if self.currentBoard[(row, col + 1)] == (1):
                     return False
                 
         return True
 
     def shouldLock(self, Piece):
         for c in Piece.getCoordinates():
-            row = c[1]
-            col = c[0]
+            row = c[0]
+            col = c[1]
 
-            if row + 1 > 24:
+            if row + 1 > 23:
                 return True
             
-            if self.currentBoard[(row + 1, col)] != (0):
+            if self.currentBoard[(row + 1, col)] == (1):
                 return True
             
             return False
@@ -70,6 +70,7 @@ class GameBoard:
         if self.shouldLock(Piece):
             for c in Piece.getCoordinates():
                 self.currentBoard[c] = (1)
+            Piece.setLockStatus(True)
         else:
             newCoords = []
 
@@ -77,8 +78,8 @@ class GameBoard:
                 self.currentBoard[c] = (0)
 
             for c in Piece.getCoordinates():
-                row = c[1]
-                col = c[0]
+                row = c[0]
+                col = c[1]
 
                 self.currentBoard[(row + 1, col)] = (2)
                 
@@ -97,10 +98,10 @@ class GameBoard:
             self.currentBoard[c] = (0)
 
         for c in Piece.getCoordinates():
-            row = c[1]
-            col = c[0]
+            row = c[0]
+            col = c[1]
 
-            self.currentBoard[(row, col - 1)]
+            self.currentBoard[(row, col - 1)] = (2)
 
             newCoords.append((row, col - 1))
 
@@ -117,14 +118,11 @@ class GameBoard:
             self.currentBoard[c] = (0)
 
         for c in Piece.getCoordinates():
-            row = c[1]
-            col = c[0]
+            row = c[0]
+            col = c[1]
 
-            self.currentBoard[(row, col + 1)]
+            self.currentBoard[(row, col + 1)] = (2)
 
             newCoords.append((row, col + 1))
 
         Piece.setCoordinates(newCoords)
-
-# Needs Testing for all Implemented features
-# This includes everything after and including isValidMove
