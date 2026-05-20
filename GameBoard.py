@@ -58,36 +58,43 @@ class GameBoard:
             row = c[0]
             col = c[1]
 
-            if row + 1 > 23:
+            if row + 1 > 24:
                 return True
             
             if self.currentBoard[(row + 1, col)] == (1):
                 return True
             
-            return False
+        return False
 
     def moveDown(self, Piece):
+        if Piece.getLockStatus() == True:
+            return
+        
         if self.shouldLock(Piece):
             for c in Piece.getCoordinates():
                 self.currentBoard[c] = (1)
             Piece.setLockStatus(True)
-        else:
-            newCoords = []
+            return
 
-            for c in Piece.getCoordinates():
-                self.currentBoard[c] = (0)
+        newCoords = []
 
-            for c in Piece.getCoordinates():
-                row = c[0]
-                col = c[1]
+        for c in Piece.getCoordinates():
+            self.currentBoard[c] = (0)
 
-                self.currentBoard[(row + 1, col)] = (2)
+        for c in Piece.getCoordinates():
+            row = c[0]
+            col = c[1]
+
+            self.currentBoard[(row + 1, col)] = (2)
                 
-                newCoords.append((row + 1, col))
+            newCoords.append((row + 1, col))
 
-            Piece.setCoordinates(newCoords)
+        Piece.setCoordinates(newCoords)
 
     def moveLeft(self, Piece):
+        if Piece.getLockStatus() == True:
+            return
+        
         if not self.isValidMove(Piece, "Left"):
             print("Illegal Move")
             return
@@ -108,6 +115,9 @@ class GameBoard:
         Piece.setCoordinates(newCoords)
 
     def moveRight(self, Piece):
+        if Piece.getLockStatus() == True:
+            return
+        
         if not self.isValidMove(Piece, "Right"):
             print("Illegal Move")
             return
@@ -128,20 +138,24 @@ class GameBoard:
         Piece.setCoordinates(newCoords)
 
     def clearLines(self):
-        highestClearedRow = 100
+        rowsCleared = []
 
         clearLine = True
 
-        for row in range(0, 24):
-            for col in range(0, 9):
+        for row in range(24, -1, -1):
+            for col in range(0, 10):
                 if self.currentBoard[(row, col)] == (0):
                     clearLine = False
             if clearLine == True:
-                if row < highestClearedRow:
-                    highestClearedRow = row
+                rowsCleared.append(row)
 
-                for col in range(0, 9):
+                for col in range(0, 10):
                     self.currentBoard[(row, col)] = (0)
 
-        if highestClearedRow != 100:
-            
+        if rowsCleared != []:
+            for rows in rowsCleared:
+                for row in range(rows - 1, -1, -1):
+                    for col in range(0, 10):
+                        if self.currentBoard[(row, col)] == (1):
+                            self.currentBoard[(row, col)] = (0)
+                            self.currentBoard[(row + 1, col)] = (1)
