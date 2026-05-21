@@ -3,11 +3,13 @@ import numpy as np
 class Piece:
     isLocked = False
 
+    coordinates = []
+
     def Transpose(self):
-        for coords in range(len(self.coordinates)):
-            r = self.coordinates[coords][0]
-            c = self.coordinates[coords][1]
-            self.coordinates[coords] = (c,r)
+        for coords in range(len(self.relCoordinates)):
+            r = self.relCoordinates[coords][0]
+            c = self.relCoordinates[coords][1]
+            self.relCoordinates[coords] = (c,r)
 
         return np.transpose(self.matrix)
 
@@ -16,10 +18,10 @@ class Piece:
 
         columns = transposed.shape[1]
 
-        for coords in range(len(self.coordinates)):
-            r = self.coordinates[coords][0]
-            c = self.coordinates[coords][1]
-            self.coordinates[coords] = (r,(columns - 1) - c)
+        for coords in range(len(self.relCoordinates)):
+            r = self.relCoordinates[coords][0]
+            c = self.relCoordinates[coords][1]
+            self.relCoordinates[coords] = (r,(columns - 1) - c)
 
         self.matrix = np.fliplr(transposed)
     
@@ -38,12 +40,15 @@ class Piece:
     def getLockStatus(self):
         return self.isLocked
 
+    def getRelCoordinates(self):
+        return self.relCoordinates
+
 class I(Piece):
     def __init__(self):
         self.matrix = np.array([
             [1, 1, 1, 1]
         ])
-        self.coordinates = [(0,0), (0,1), (0,2), (0,3)]
+        self.relCoordinates = [(0,0), (0,1), (0,2), (0,3)]
 
 class O(Piece):
     def __init__(self):
@@ -51,7 +56,7 @@ class O(Piece):
             [1, 1], 
             [1, 1]
         ])
-        self.coordinates = [(0,0), (0,1), (1,0), (1,1)]
+        self.relCoordinates = [(0,0), (0,1), (1,0), (1,1)]
 
 class T(Piece):
     def __init__(self):
@@ -59,7 +64,7 @@ class T(Piece):
             [0, 1, 0], 
             [1, 1, 1]
         ])
-        self.coordinates = [(0,1), (1,0), (1,1), (1,2)]
+        self.relCoordinates = [(0,1), (1,0), (1,1), (1,2)]
 
 class S(Piece):
     def __init__(self):
@@ -67,7 +72,7 @@ class S(Piece):
             [0, 1, 1], 
             [1, 1, 0]
         ])
-        self.coordinates = [(0,1), (0,2), (1,0), (1,1)]
+        self.relCoordinates = [(0,1), (0,2), (1,0), (1,1)]
 
 class Z(Piece):
     def __init__(self):
@@ -75,7 +80,7 @@ class Z(Piece):
             [1, 1, 0], 
             [0, 1, 1]
         ])
-        self.coordinates = [(0,0), (0,1), (1,1), (1,2)]
+        self.relCoordinates = [(0,0), (0,1), (1,1), (1,2)]
 
 class J(Piece):
     def __init__(self):
@@ -83,7 +88,7 @@ class J(Piece):
             [1, 0, 0], 
             [1, 1, 1]
         ])
-        self.coordinates = [(0,0), (1,0), (1,1), (1,2)]
+        self.relCoordinates = [(0,0), (1,0), (1,1), (1,2)]
 
 class L(Piece):
     def __init__(self):
@@ -91,4 +96,4 @@ class L(Piece):
             [0, 0, 1], 
             [1, 1, 1]
         ])
-        self.coordinates = [(0,2), (1,0), (1,1), (1,2)]
+        self.relCoordinates = [(0,2), (1,0), (1,1), (1,2)]

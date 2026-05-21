@@ -14,7 +14,7 @@ class GameBoard:
     def addPiece(self, Piece):
         newCoords = []
 
-        for c in Piece.getCoordinates():
+        for c in Piece.getRelCoordinates():
             row = c[0]
             col = c[1]
 
@@ -159,3 +159,79 @@ class GameBoard:
                         if self.currentBoard[(row, col)] == (1):
                             self.currentBoard[(row, col)] = (0)
                             self.currentBoard[(row + 1, col)] = (1)
+
+    def canRotate(self, Piece):
+        coord = Piece.getRelCoordinates()
+
+        for coords in range(len(coord)):
+            r = coord[coords][0]
+            c = coord[coords][1]
+            coord[coords] = (c,r)
+        
+        maxcol = 0
+        mincol = 0
+
+        for coords in range(len(coord)):
+            if coord[coords][1] > maxcol:
+                maxcol = coord[coords][1]
+            if coord[coords][1] < mincol:
+                mincol = coord[coords][1]
+
+        columns = maxcol - mincol
+
+        for coords in range(len(coord)):
+            r = coord[coords][0]
+            c = coord[coords][1]
+            coord[coords] = (r,(columns - 1) - c)
+
+        for coords in coord:
+            if self.currentBoard[(coords)] == (1):
+                return False
+            
+        return True
+
+    def rotatePiece(self, Piece):
+        if not self.canRotate(Piece):
+            return
+
+        for c in Piece.getCoordinates():
+            self.currentBoard[(c)] = (0)
+
+        coords = Piece.getCoordinates()
+        relCoords = Piece.getRelCoordinates()
+        adjustment = []
+
+        for c in range(len(coords)):
+            row = coords[c][0]
+            col = coords[c][1]
+
+            relRow = relCoords[c][0]
+            relCol = relCoords[c][1]
+
+            adjustment.append((row - relRow, col - relCol))
+
+        Piece.Rotate()
+        newRelCoords = Piece.getRelCoordinates()
+        newCoords = []
+
+        for c in range(len(newRelCoords)):
+            row = newRelCoords[c][0]
+            col = newRelCoords[c][1]
+
+            adjRow = adjustment[c][0]
+            adjCol = adjustment[c][1]
+
+            newCoords.append((row + adjRow, col + adjCol))
+
+        for c in newCoords:
+            self.currentBoard[c] = (2)
+
+        Piece.setCoordinates(newCoords)
+
+b = GameBoard()
+i = Piece.I()
+b.addPiece(i)
+b.rotatePiece(i)
+print(i.getCoordinates())
+print(b.getBoard())
+# The coordinates for both are messed up. The canRotate is using relative coords without converting to the actual position on the gameBoard. The Rotate has messed up the conversion.
